@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+     
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js"></script>
+
+    <script type="text/javascript">
+
+        google.load("jquery", "1");
+	google.load('visualization', '1.0', {'packages':['corechart']});
+        function mycallback(list){
+	    google.setOnLoadCallback(drawChart(list));
+            function drawChart(list) {
+                var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Topping');
+		data.addColumn('number', 'Slices');
+
+		var array = $.map(list, function(el) {
+		  return [[el[0],el[1]]];
+		});
+		data.addRows(array);
+		var options = {'title':'How Much Pizza I Ate Last Night',
+				     'width':400,
+				     'height':300};
+
+		  // Instantiate and draw our chart, passing in some options.
+		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+		      chart.draw(data, options);
+		}
+    	}
+
+	$(document).ready(function(){
+        $("#btn").click(function(){
+           $.get( "/graph",function(data){ 
+		data1 = eval(data);
+		mycallback(data1);
+			    
+		});
+           });
+
+        });
+
+
+    </script>         
+   </head>
+
+  <body>
+  
+    <!--Div that will hold the pie chart-->
+  
+  <p>click the below button to draw a Pie chart <p><br>
+  <button id="btn">Draw Pie chart</button>
+  <div id="chart_div"></div>
+    
+  </body>
+</html> 

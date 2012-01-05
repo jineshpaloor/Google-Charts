@@ -1,56 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Your description goes here" />
+	<meta name="keywords" content="your,keywords,goes,here" />
+	<meta name="author" content="Your Name" />
+
+	<title>Chart</title>
      
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/static/chart.js" > </script>
+	
 
-    <script type="text/javascript">
-
-        google.load("jquery", "1");
-	google.load('visualization', '1.0', {'packages':['corechart']});
-        function mycallback(list){
-	    google.setOnLoadCallback(drawChart(list));
-            function drawChart(list) {
-                var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Topping');
-		data.addColumn('number', 'Slices');
-
-		var array = $.map(list, function(el) {
-		  return [[el[0],el[1]]];
-		});
-		data.addRows(array);
-		var options = {'title':'How Much Pizza I Ate Last Night',
-				     'width':400,
-				     'height':300};
-
-		  // Instantiate and draw our chart, passing in some options.
-		var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-		      chart.draw(data, options);
-		}
-    	}
-
-	$(document).ready(function(){
-        $("#btn").click(function(){
-           $.get( "/graph",function(data){ 
-		data1 = eval(data);
-		mycallback(data1);
-			    
-		});
-           });
-
-        });
-
-
-    </script>         
    </head>
 
   <body>
   
     <!--Div that will hold the pie chart-->
-  
-  <p>click the below button to draw a Pie chart <p><br>
-  <button id="btn">Draw Pie chart</button>
+  <h2>Google Visualization API</h2>
+  <p>Google Chart Tools provide a perfect way to visualize data on your website. From simple line charts to complex hierarchical tree maps, the chart galley provides a large number of well-designed chart types. Populating your data is easy using the provided client- and server-side tools.
+<p><br>
+  <button id="btn1">Draw Pie chart</button>
+  <button id="btn2">Draw Bar chart</button>
   <div id="chart_div"></div>
     
   </body>
